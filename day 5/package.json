@@ -1,0 +1,32 @@
+{
+  "name": "day-5",
+  "version": "1.0.0",
+  "description": "cleaning day4 wala project separating components,usestate hook",
+  "keywords": [
+    "usestate",
+    "day_project_refiing"
+  ],
+  "homepage": "https://github.com/sankarmohanty4078/react-journey#readme",
+  "bugs": {
+    "url": "https://github.com/sankarmohanty4078/react-journey/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sankarmohanty4078/react-journey.git"
+  },
+  "license": "ISC",
+  "author": "Sankar",
+  "type": "commonjs",
+  "scripts": {
+    "test": "jest",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  }
+}
