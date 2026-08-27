@@ -46,10 +46,9 @@ ul >li{
 }
 .res-container{
     width: 80%;
-    display: flex;
+    display: flex; 
 }
 .res-card{
-height: 350px;
 width: 20%;
 box-shadow: 10px 10px solid black;
 padding: 15px;
@@ -62,6 +61,12 @@ gap: 5px;
 height: 50%;
 width: 100%;
 
+}
+.res-card  .rating{
+    color:white;
+    padding: 1px;
+    font-weight: 500;
+    background-color: chartreuse;
 }
 .card-desc{
     display: flex;
