@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Thumbnails } from "../utils/Constants.js";
 import Shimmer from "./Shimmer.js";
+import { Link } from "react-router-dom";
 
 const ResCard = (props) => {
   const { resData } = props;
@@ -53,26 +54,28 @@ export const ResContainer = () => {
     try {
       const apiData = await fetch(
         // Using CORSFix so the user doesn't need a CORS extension.
-        "https://proxy.corsfix.com/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.59430&lng=85.13520&collection=83639&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null",
+        "https://namastedev.com/api/v1/listRestaurants",
       );
 
       const jon = await apiData.json();
+      // console.log(jon);
+      const restaurant = jon.data.data.cards.map(
+        (c) => c?.card?.card?.gridElements?.infoWithStyle?.restaurants,
+      );
+      // console.log(restaurant);
+      const rest = restaurant[1].map((item) => ({
+        name: item.info.name,
+        cuisines: item.info.cuisines,
+        avgRating: item.info.avgRating,
+        deliveryTime: item.info.sla?.deliveryTime,
+        costForTwo: item.info.costForTwo,
+        resId: item.info.id,
+      }));
 
-      const restaurant = jon.data.cards
-        .map((c) => c?.card?.card?.info)
-        .filter(Boolean)
-        .map((info) => ({
-          name: info.name,
-          cuisines: info.cuisines,
-          avgRating: info.avgRating,
-          deliveryTime: info.sla?.deliveryTime,
-          costForTwo: info.costForTwo,
-        }));
+      // console.log(rest);
 
-      console.log(restaurant);
-
-      setlistOfRestaurants(restaurant);
-      setRestaurants(restaurant);
+      setlistOfRestaurants(rest);
+      setRestaurants(rest);
     } catch (e) {
       console.log(e.message);
     }
@@ -123,8 +126,16 @@ export const ResContainer = () => {
       <div className="res-container">
         <br />
 
-        {listOfRestaurants.map((restaurant, id) => (
-          <ResCard key={id} resData={restaurant} />
+        {listOfRestaurants.map((restaurant, resId) => (
+          <Link
+            key={restaurant.resId}
+            to={"/restaurants/" + restaurant.resId}
+            className="res-card-link"
+          >
+            {/* As Link is the direct child of map() so only it is mandated for
+            having a unique key */}
+            <ResCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>

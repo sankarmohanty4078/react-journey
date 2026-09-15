@@ -6,6 +6,7 @@ import AboutUs from "./components/AboutUs";
 import Contact from "./components/Contact";
 import Error_about from "./components/Error_about";
 import Error_home from "./components/Error_home";
+import RestaurantMenu from "./components/RestaurantMenu";
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 // import logo from "url:./img/logo.jpg";
@@ -43,6 +44,11 @@ const appRouter = createBrowserRouter([
         //Path for Contact page
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        //path for restaurants with unique resId
+        path: "/restaurants/:resId",
+        element: <RestaurantMenu />,
       },
     ],
     //http://localhost:1234/kfjhdh will throw an error which is well handled by the react router
